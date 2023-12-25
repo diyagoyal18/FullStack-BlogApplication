@@ -7,7 +7,7 @@ const app= express();
 
 app.use(express.json());
 app.use("/api/user",router);
-app.use("/api/blog",blogRouter);
+app.use("/api/blog",blogRouter); 
 mongoose
     .connect(
     'mongodb+srv://dgoyal6be22:dK7hPyLKwbn69nP7@cluster0.m8lzqna.mongodb.net/Blog?retryWrites=true&w=majority'
