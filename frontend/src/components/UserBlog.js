@@ -1,6 +1,6 @@
 import React from 'react'
 
-const UerBlog = () => {
+const UserBlog = () => {
   return (
     <div>
       
@@ -8,4 +8,4 @@ const UerBlog = () => {
   )
 }
 
-export default UerBlog
+export default UserBlog
