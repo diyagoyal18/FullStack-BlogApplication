@@ -15,6 +15,6 @@ mongoose
     )
     .then(()=>app.listen(5000))
     .then(()=>
-    console.log("connected to database and listening to 5000")
+    console.log("connected to database and listening at 5000")
     )
     .catch((err)=>console.log("error"));
