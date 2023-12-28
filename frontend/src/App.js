@@ -2,7 +2,7 @@ import Header from './components/Header'
 import './App.css';
 import React from 'react'
 import { Route, Routes } from 'react-router-dom';
-import Login from "./components/Login";
+import Login from './components/Login';
 import Blogs from "./components/Blogs";
 import UserBlog from "./components/UserBlog";
 import BogDetail from "./components/BlogDetail";

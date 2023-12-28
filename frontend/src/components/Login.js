@@ -1,10 +1,42 @@
 import { Box, Button, TextField, Typography } from '@mui/material'
-import React from 'react'
-
+import React, { useState } from 'react'
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { authActions } from '../store';
 const Login = () => {
+    const dispatch= useDispatch();
+    const [inputs, setInputs] = useState({
+        name:"", email:"", password:""
+    })
+    const [isSignup,setIsSignup] = useState(false);
+    const handleChange = (e)=>{
+        setInputs((prevState)=>({
+            ...prevState,
+            [e.target.name]: e.target.value
+        }))
+    }
+    const sendRequest = async(type= "login")=>{
+      const res= await axios.post(`http://localhost:5000/api/user/${type}`, {
+            name: inputs.name,
+            email:inputs.email,
+            password: inputs.password
+        }).catch(err=>console.log(err));
+        const data = await res.data;
+        return data;
+    }
+    const handleSubmit= (e)=>{
+        e.preventDefault()
+        console.log(inputs);
+        if(isSignup){
+            sendRequest("signup").then(()=>dispatch(authActions.login())).then(data=>console.log(data))
+        }
+        else{
+            sendRequest().then(()=>dispatch(authActions.login())).then(data=>console.log(data));
+        }
+    }
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Box
         maxWidth={400}
          display={'flex'} 
@@ -18,13 +50,35 @@ const Login = () => {
         borderRadius={5}
         >
           <Typography variant='h3' padding={3} textAlign={'center'}>
-          Login
+          {isSignup ? "Signup" : "Login"}
           </Typography>
-          <TextField  placeholder='Name' margin={'normal'}/>
-          <TextField type='email' placeholder='Email' margin={'normal'}/>
-          <TextField type='password' placeholder='Password' margin={'normal'}/>
-          <Button variant='contained' sx={{borderRadius:2, color:'pink', marginTop:3}} >Submit</Button>
-          <Button sx={{borderRadius:2, marginTop:3}}>Signup</Button>
+{    isSignup &&     
+ <TextField name='name'
+ onChange={handleChange}
+  value={inputs.name} placeholder='Name' 
+  margin={'normal'}/>
+}          
+
+<TextField name='email'
+ onChange={handleChange}
+  value={inputs.email}
+   type='email' 
+   placeholder='Email' 
+   margin={'normal'}/>
+          <TextField name='password' 
+          onChange={handleChange} 
+          value={inputs.password} 
+          type='password'
+           placeholder='Password' 
+           margin={'normal'}/>
+          <Button
+           type='submit'
+            variant='contained' 
+            sx={{borderRadius:2, color:'pink', marginTop:3}}
+             >Submit</Button>
+          <Button onClick={()=>setIsSignup(!isSignup)} 
+          sx={{borderRadius:2, marginTop:3}}
+          >Change to {isSignup ? "Login": "Signup"}</Button>
         </Box>
       </form>
     </div>
