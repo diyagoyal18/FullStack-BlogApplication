@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import {AppBar, Button, Toolbar, Typography, Box, Tabs,Tab} from '@mui/material';
 import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { authActions } from '../store';
 const Header = () => {
+  const dispatch = useDispatch();
  const isLoggedIn = useSelector(state=> state.isLoggedIn);
 
   const [value, setValue]= useState();
@@ -22,8 +24,8 @@ const Header = () => {
       </Box>}
       <Box display={'flex'} marginLeft={'auto'}>
        {!isLoggedIn && <><Button LinkComponent={Link} to="/login"  variant='contained'  sx={{margin:1, borderRadius:2, color: 'pink'}} >Login</Button>
-        <Button LinkComponent={Link} to="/login" variant='contained'sx={{margin:1,borderRadius:2,color: 'pink'}} >Signup</Button> </>}
-{   isLoggedIn  &&    <Button LinkComponent={Link} to="/login"  variant='contained'sx={{margin:1,borderRadius:2,color: 'pink'}} >Logout</Button>
+          </>} 
+{   isLoggedIn  &&    <Button onClick={()=>dispatch(authActions.logout())} LinkComponent={Link} to="/login"  variant='contained'sx={{margin:1,borderRadius:2,color: 'pink'}} >Logout</Button>
 }
       </Box>
     </Toolbar>
