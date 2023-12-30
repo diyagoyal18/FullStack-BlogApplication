@@ -9,7 +9,7 @@ const Login = () => {
     const dispatch= useDispatch();
     const [inputs, setInputs] = useState({
         name:"", email:"", password:""
-    })
+    });
     const [isSignup,setIsSignup] = useState(false);
     const handleChange = (e)=>{
         setInputs((prevState)=>({
@@ -78,7 +78,7 @@ const Login = () => {
           <Button
            type='submit'
             variant='contained' 
-            sx={{borderRadius:2, color:'pink', marginTop:3}}
+            sx={{borderRadius:2, color:'white', marginTop:3, bgcolor:'#790957'}}
              >Submit</Button>
           <Button onClick={()=>setIsSignup(!isSignup)} 
           sx={{borderRadius:2, marginTop:3}}
