@@ -20,6 +20,8 @@ const Header = () => {
       <Tabs textColor='inherit' value={value} onChange={(e,val)=>setValue(val)}>
         <Tab LinkComponent={Link} to="/blogs" label="All Blogs"/>  
         <Tab LinkComponent={Link} to="/myBlogs"  label="My Blogs"/>
+        <Tab LinkComponent={Link} to="/blogs/add"  label="Add Blog"/>
+
       </Tabs>
       </Box>}
       <Box display={'flex'} marginLeft={'auto'}>
