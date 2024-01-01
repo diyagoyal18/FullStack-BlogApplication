@@ -47,7 +47,7 @@ const Blog = ({title, description, imageURL, userName, isUser, _id}) => {
         component="img"
         height="194"
         image={imageURL}
-        alt="Paella dish"
+        alt="image"
       />
       
       <CardContent>
